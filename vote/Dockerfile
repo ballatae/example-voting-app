@@ -9,9 +9,9 @@ RUN apt-get update && \
 # Set the application directory
 WORKDIR /usr/local/app
 
-# Install our requirements.txt
+# Install our requirements.txt with trusted hosts to avoid SSL issues
 COPY requirements.txt ./requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org --no-cache-dir -r requirements.txt
 
 # dev defines a stage for development, where it'll watch for filesystem changes
 FROM base AS dev
